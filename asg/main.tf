@@ -167,8 +167,8 @@ resource "aws_route53_record" "app" {
   type    = "A"
   ttl     = "60"
   alias {
-    name                   = data.terraform_remote_state.alb.dns_name
-    zone_id                = data.terraform_remote_state.alb.zone_id
+    name                   = data.terraform_remote_state.alb.outputs.dns_name
+    zone_id                = data.terraform_remote_state.alb.outputs.zone_id
     evaluate_target_health = true
   }
 }
