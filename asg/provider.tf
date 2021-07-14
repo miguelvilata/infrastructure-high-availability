@@ -36,6 +36,15 @@ data "terraform_remote_state" "vpc" {
   }
 }
 
+data "terraform_remote_state" "key" {
+  backend = "s3"
+  config = {
+    bucket = "terraform-devops-dev"
+    key    = "dev/key_terraform.tfstate"
+    region = "eu-west-1"
+  }
+}
+
 data "terraform_remote_state" "alb" {
   backend = "s3"
   config = {
