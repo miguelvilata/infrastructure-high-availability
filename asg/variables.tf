@@ -49,7 +49,7 @@ variable "creator" {
 }
 variable "application" {
   description = "Deploymente by"
-  default     = "client-server"
+  default     = "ha"
 }
 variable "terraform" {
   description = "Terraform Template"
