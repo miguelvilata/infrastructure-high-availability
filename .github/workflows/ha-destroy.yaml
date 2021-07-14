@@ -36,37 +36,6 @@ jobs:
       # Runs terraform stack
       - name: 'Checkout'
         uses: actions/checkout@master
-      - name: 'Terraform Init alb'
-        uses: hashicorp/terraform-github-actions@master
-        with:
-          tf_actions_version: 1.0.2
-          tf_actions_subcommand: 'init'
-          tf_actions_working_dir: 'alb'
-          tf_actions_comment: true
-      - name: 'Terraform fmt ALB'
-        uses: hashicorp/terraform-github-actions@master
-        with:
-          tf_actions_version: 1.0.2
-          tf_actions_subcommand: 'validate'
-          tf_actions_working_dir: 'alb'
-          tf_actions_comment: true
-      - name: 'Terraform plan ALB'
-        uses: hashicorp/terraform-github-actions@master
-        with:
-          tf_actions_version: 1.0.2
-          tf_actions_subcommand: 'plan'
-          tf_actions_working_dir: 'alb'
-          tf_actions_comment: true
-      - name: 'Terraform destroy ALB'
-        uses: hashicorp/terraform-github-actions@master
-        with:
-          tf_actions_version: 1.0.2
-          tf_actions_subcommand: 'destroy'
-          tf_actions_working_dir: 'alb'
-          tf_actions_comment: true
-          args: '--auto-approve'
-  
-      # Runs terraform stack
       - name: 'Terraform Init ASG'
         uses: hashicorp/terraform-github-actions@master
         with:
@@ -94,5 +63,35 @@ jobs:
           tf_actions_version: 1.0.2
           tf_actions_subcommand: 'destroy'
           tf_actions_working_dir: 'asg'
+          tf_actions_comment: true
+          args: '--auto-approve'
+        
+- name: 'Terraform Init alb'
+        uses: hashicorp/terraform-github-actions@master
+        with:
+          tf_actions_version: 1.0.2
+          tf_actions_subcommand: 'init'
+          tf_actions_working_dir: 'alb'
+          tf_actions_comment: true
+      - name: 'Terraform fmt ALB'
+        uses: hashicorp/terraform-github-actions@master
+        with:
+          tf_actions_version: 1.0.2
+          tf_actions_subcommand: 'validate'
+          tf_actions_working_dir: 'alb'
+          tf_actions_comment: true
+      - name: 'Terraform plan ALB'
+        uses: hashicorp/terraform-github-actions@master
+        with:
+          tf_actions_version: 1.0.2
+          tf_actions_subcommand: 'plan'
+          tf_actions_working_dir: 'alb'
+          tf_actions_comment: true
+      - name: 'Terraform destroy ALB'
+        uses: hashicorp/terraform-github-actions@master
+        with:
+          tf_actions_version: 1.0.2
+          tf_actions_subcommand: 'destroy'
+          tf_actions_working_dir: 'alb'
           tf_actions_comment: true
           args: '--auto-approve'
