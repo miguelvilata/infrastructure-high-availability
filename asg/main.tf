@@ -156,3 +156,19 @@ resource "aws_autoscaling_group" "AutoSG" {
     }
   ]
 }
+
+
+#####################################################
+## CREATE DNS RECORD ROUTE 53 FOR app INSTANCE ##
+#####################################################
+resource "aws_route53_record" "app" {
+  zone_id = var.dns_zone_id
+  name    = "ha"
+  type    = "A"
+  ttl     = "60"
+  alias {
+    name                   = data.terraform_remote_state.alb.dns_name
+    zone_id                = data.terraform_remote_state.alb.zone_id
+    evaluate_target_health = true
+  }
+}

@@ -28,6 +28,9 @@ variable "health_check_grace_period" {
 variable "instance_type" {
   default = "t3.small"
 }
+variable "dns_zone_id" {
+  default = "Z00531613R4SJT0CLAZ4Q" 
+}
 
 ##########
 ## TAGS ##
