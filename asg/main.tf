@@ -2,11 +2,11 @@
 ##CREATE ROLE IAM FOR INSTANCE##
 #################################
 resource "aws_iam_role" "app_role" {
-  name               = "app_role"
+  name               = "asg-${var.project}-${var.application}-${var.env}"
   assume_role_policy = file("iam-role-app.json")
 }
 resource "aws_iam_instance_profile" "app_profile" {
-  name = "role_app"
+  name = "${var.project}-${var.application}-${var.env}"
   role = aws_iam_role.app_role.name
 }
 
@@ -14,12 +14,12 @@ resource "aws_iam_instance_profile" "app_profile" {
 ##CREATE POLICY IAM FOR ROLE app INSTANCE##
 ##############################################
 resource "aws_iam_policy" "app_policy" {
-  name        = "${var.project}-${var.application}-${var.env}"
+  name        = "asg-${var.project}-${var.application}-${var.env}"
   description = "A app policy"
   policy      = file("iam-policy-app.json")
 }
 resource "aws_iam_policy_attachment" "app_attach" {
-  name       = "${var.project}-${var.application}-${var.env}"
+  name       = "asg-${var.project}-${var.application}-${var.env}"
   roles      = [aws_iam_role.app_role.name]
   policy_arn = aws_iam_policy.app_policy.arn
 }
@@ -32,7 +32,7 @@ resource "aws_iam_role_policy_attachment" "ssm_attach" {
 ##CREATE SECURITY GROUPS FOR EC2 INSTANCE##
 ###########################################
 resource "aws_security_group" "app" {
-  name        = "app-${var.project}-${var.application}-${var.env}"
+  name        = "asg-${var.project}-${var.application}-${var.env}"
   description = "Security group for ASG Instance"
   vpc_id      = data.terraform_remote_state.vpc.outputs.vpc_id
 
@@ -40,13 +40,13 @@ resource "aws_security_group" "app" {
     from_port   = "80"
     to_port     = "80"
     protocol    = "tcp"
-    cidr_blocks = [data.terraform_remote_state.alb.outputs.sg_alb]
+    cidr_blocks = [data.terraform_remote_state.vpc.outputs.vpc_cidr]
   }
   ingress {
     from_port   = "443"
     to_port     = "443"
     protocol    = "tcp"
-    cidr_blocks = [data.terraform_remote_state.alb.outputs.sg_alb]
+    cidr_blocks = [data.terraform_remote_state.vpc.outputs.vpc_cidr]
   }
   egress {
     from_port   = 0
