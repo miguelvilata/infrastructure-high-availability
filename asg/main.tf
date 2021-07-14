@@ -165,7 +165,7 @@ resource "aws_route53_record" "app" {
   zone_id = var.dns_zone_id
   name    = "ha"
   type    = "A"
-  ttl     = "60"
+
   alias {
     name                   = data.terraform_remote_state.alb.outputs.dns_name
     zone_id                = data.terraform_remote_state.alb.outputs.zone_id
