@@ -25,13 +25,12 @@ sudo systemctl stop nginx
 ############################
 ##### APP INSTALL ######
 ############################
-mkdir -p /usr/share/nginx/
-cd /usr/share/nginx/
-aws s3 cp s3://app-devops-dev/ha/ha.zip .
-rm -rf html
+rm -rf /usr/share/nginx/html
+mkdir -p /usr/share/nginx/html
+cd /usr/share/nginx/html
+aws s3 cp s3://terraform-devops-dev/ha/ha.zip .
 unzip ha.zip
-mv app html
-chown -R nginx:nginx ../nginx
+chown -R nginx:nginx ../../nginx
 
 #######################
 ## INITIAL NGINX ##

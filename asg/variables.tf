@@ -5,6 +5,10 @@ variable "region" {
   default = "eu-west-1"
 }
 
+variable "s3_bucket" {
+  default = "terraform-devops-dev"
+}
+
 variable "azs" {
   default = ["eu-west-1a", "eu-west-1b"]
   type    = list
