@@ -25,6 +25,7 @@ sudo systemctl stop nginx
 ############################
 ##### APP INSTALL ######
 ############################
+rm -rf /usr/share/nginx/html
 mkdir -p /usr/share/nginx/html
 cd /usr/share/nginx/html
 aws s3 cp s3://terraform-devops-dev/ha/ha.zip .
