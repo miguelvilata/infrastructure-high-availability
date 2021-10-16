@@ -81,6 +81,18 @@ resource "aws_security_group" "app_ssh" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
+
+#################
+## Upload app s3 
+#################
+
+## Upload files after bucket creations ##
+resource "aws_s3_bucket_object" "upload_files" {
+  bucket = var.s3_bucket
+  key    = "ha/ha.zip"
+  source = "./code/ha.zip"
+}
+
 #################################
 ## CREATE LAUNCH CONFIGURATION ##
 #################################
